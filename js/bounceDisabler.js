@@ -71,6 +71,7 @@ var bounceDisabler = function(){
 	function handleTouchEnd (evt){
 		if(track.length > 2){
 			velocity = calcVelocity();
+      requestAnimFrame(animate);
 		}
 		console.log(velocity);
 	}
@@ -107,9 +108,13 @@ var bounceDisabler = function(){
     }
   }
 
-  function render(){
-      scrollBy(-velocity.x, -velocity.y);
-      vector.skalarMult(velocity, 0.95);
+  function animate(){
+    scrollBy(-velocity.x, -velocity.y);
+    vector.skalarMult(velocity, 0.95);
+    console.log("animate");
+    if(vector.length(velocity) > 0.2){
+      requestAnimFrame(animate);
+    }
   }
 
   function init(){
@@ -118,11 +123,6 @@ var bounceDisabler = function(){
     document.addEventListener("touchend", handleTouchEnd);
     document.addEventListener("touchcancel", handleTouchEnd);
     document.addEventListener("touchleave", handleTouchEnd);
-
-    (function animloop(){
-        requestAnimFrame(animloop);
-        render();
-    })();
   }
 
   init();
