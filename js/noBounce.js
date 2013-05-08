@@ -1,4 +1,4 @@
-var bounceDisabler = function(){
+var noBounce = function(){
 	var module = {};
 
   var settings = {
