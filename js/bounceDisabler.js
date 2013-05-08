@@ -8,6 +8,27 @@ var bounceDisabler = function(){
 		y: 0
 	};
 
+  var vector = {
+    subtraction: function(v1, v2){
+      return {
+        x: v1.x - v2.x,
+        y: v1.y - v2.y
+      };
+    },
+    length: function(v) {
+		  return Math.sqrt((v.x * v.x) + (v.y * v.y));
+	  },
+    unit: function(v){
+      var length = vector.length(v);
+      v.x /= length;
+      v.y /= length;
+    },
+    skalarMult: function(v, s) {
+      v.x *= s;
+      v.y *= s;
+    }
+  };
+
   var requestAnimFrame = (function(){
       return  window.requestAnimationFrame       || 
               window.webkitRequestAnimationFrame || 
