@@ -1,6 +1,11 @@
 var bounceDisabler = function(){
 	var module = {};
 
+  var settings = {
+    preventDefault: true,
+    animate: true
+  };
+
 	var track = [];
 
 	var velocity = {
@@ -41,7 +46,9 @@ var bounceDisabler = function(){
     })();
 
 	function handleTouchStart (evt){
-		evt.preventDefault();
+    if(settings.preventDefault){
+      evt.preventDefault();
+    }
 		var point,
 			touch;
 
@@ -69,7 +76,7 @@ var bounceDisabler = function(){
 	}
 
 	function handleTouchEnd (evt){
-		if(track.length > 2){
+		if(track.length > 2 && settings.animate){
 			velocity = calcVelocity();
       requestAnimFrame(animate);
 		}
@@ -115,16 +122,21 @@ var bounceDisabler = function(){
     }
   }
 
-  function init(){
+  module.init = function(options){
+    if(typeof options.preventDefault === "boolean"){
+      settings.preventDefault = options.preventDefault;
+    }
+    if(typeof options.animate === "boolean"){
+      settings.animate = options.animate;
+    }
+
     document.addEventListener("touchstart", handleTouchStart);
     document.addEventListener("touchmove", handleTouchMove);
     document.addEventListener("touchend", handleTouchEnd);
     document.addEventListener("touchcancel", handleTouchEnd);
     document.addEventListener("touchleave", handleTouchEnd);
-  }
+  };
 
-  init();
-	
 	return module;
 }();
 
