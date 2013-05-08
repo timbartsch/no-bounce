@@ -8,6 +8,17 @@ var bounceDisabler = function(){
 		y: 0
 	};
 
+  var requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       || 
+              window.webkitRequestAnimationFrame || 
+              window.mozRequestAnimationFrame    || 
+              window.oRequestAnimationFrame      || 
+              window.msRequestAnimationFrame     || 
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+
 	function handleTouchStart (evt){
 		evt.preventDefault();
 		var point,
@@ -45,10 +56,10 @@ var bounceDisabler = function(){
 
 	function calcVelocity(){
 		var p1,
-			p2,
-			v,
-			timeDiff,
-			length;
+        p2,
+        v,
+        timeDiff,
+        length;
 
 		p1 = track[0];
 		p2 = track[track.length-1];
@@ -56,7 +67,7 @@ var bounceDisabler = function(){
 		v = vector.subtraction(p2, p1);
 		length = vector.length(v);
 		vector.unit(v);
-		vector.skalarMult(v, length / timeDiff * 4);
+		vector.skalarMult(v, length / timeDiff * 20);
 		return v;
 	}
 
@@ -65,6 +76,7 @@ var bounceDisabler = function(){
         p2,
         x,
         y;
+
     if(track.length > 1){
       p1 = track[track.length -1];
       p2 = track[track.length -2];
@@ -74,11 +86,21 @@ var bounceDisabler = function(){
     }
   }
 
+  function render(){
+      scrollBy(-velocity.x, -velocity.y);
+      vector.skalarMult(velocity, 0.95);
+  }
+
 	document.addEventListener("touchstart", handleTouchStart);
 	document.addEventListener("touchmove", handleTouchMove);
 	document.addEventListener("touchend", handleTouchEnd);
 	document.addEventListener("touchcancel", handleTouchEnd);
 	document.addEventListener("touchleave", handleTouchEnd);
+
+  (function animloop(){
+			requestAnimFrame(animloop);
+			render();
+		})();
 	
 	return module;
 }();
