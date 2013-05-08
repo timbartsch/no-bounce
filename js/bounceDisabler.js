@@ -91,16 +91,20 @@ var bounceDisabler = function(){
       vector.skalarMult(velocity, 0.95);
   }
 
-	document.addEventListener("touchstart", handleTouchStart);
-	document.addEventListener("touchmove", handleTouchMove);
-	document.addEventListener("touchend", handleTouchEnd);
-	document.addEventListener("touchcancel", handleTouchEnd);
-	document.addEventListener("touchleave", handleTouchEnd);
+  function init(){
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("touchcancel", handleTouchEnd);
+    document.addEventListener("touchleave", handleTouchEnd);
 
-  (function animloop(){
-			requestAnimFrame(animloop);
-			render();
-		})();
+    (function animloop(){
+        requestAnimFrame(animloop);
+        render();
+    })();
+  }
+
+  init();
 	
 	return module;
 }();
