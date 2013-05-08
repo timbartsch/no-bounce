@@ -27,7 +27,7 @@ settings = {
   preventDefault: true,
   animate: true
 }
-``
+```
 
-- **`preventDefault`**: calls event.preventDefault() in touchstart handler if `true`
-- **`animate`**: does a decelerating scroll animiation after touchend if `true`
+- *``preventDefault``**: calls event.preventDefault() in touchstart handler if ``true``
+- **``animate``**: does a decelerating scroll animiation after touchend if ``true``
