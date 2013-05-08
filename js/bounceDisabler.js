@@ -73,7 +73,6 @@ var bounceDisabler = function(){
 			velocity = calcVelocity();
       requestAnimFrame(animate);
 		}
-		console.log(velocity);
 	}
 
 	function calcVelocity(){
@@ -111,7 +110,6 @@ var bounceDisabler = function(){
   function animate(){
     scrollBy(-velocity.x, -velocity.y);
     vector.skalarMult(velocity, 0.95);
-    console.log("animate");
     if(vector.length(velocity) > 0.2){
       requestAnimFrame(animate);
     }
