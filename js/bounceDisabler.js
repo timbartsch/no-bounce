@@ -61,15 +61,15 @@ var bounceDisabler = function(){
 	}
 
   function doScroll(){
-    var pos1,
-        pos2,
+    var p1,
+        p2,
         x,
         y;
     if(track.length > 1){
-      pos1 = track[track.length -1];
-      pos2 = track[track.length -2];
-      x = pos2.x - pos1.x;
-      y = pos2.y - pos1.y;
+      p1 = track[track.length -1];
+      p2 = track[track.length -2];
+      x = p2.x - p1.x;
+      y = p2.y - p1.y;
       window.scrollBy(x, y);
     }
   }
