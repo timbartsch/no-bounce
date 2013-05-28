@@ -3,6 +3,7 @@ noBounce.js
 
 noBounce is a little javascript helper that disables the bounce effect in iOS safari (and potentially all other browsers).
 
+Check out an [example](http://timbartsch.github.io/examples/no-bounce/).
 
 Usage
 ------
@@ -29,5 +30,5 @@ settings = {
 }
 ```
 
-- *``preventDefault``**: calls event.preventDefault() in touchstart handler if ``true``
-- **``animate``**: does a decelerating scroll animiation after touchend if ``true``
+- **preventDefault**: calls event.preventDefault() in touchstart handler if ``true``
+- **animate**: does a decelerating scroll animiation after touchend if ``true``
