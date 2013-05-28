@@ -1,7 +1,7 @@
 noBounce.js
 ===========
 
-noBounce is a little javascript helper that disables the bounce effect in iOS safari (and potentially all other browsers).
+noBounce is a little javascript helper that disables the bounce effect in iOS safari.
 
 Check out an [example](http://timbartsch.github.io/examples/no-bounce/).
 
