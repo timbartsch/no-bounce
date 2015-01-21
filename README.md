@@ -5,6 +5,13 @@ noBounce is a little javascript helper that disables the bounce effect in iOS sa
 
 Check out an [example](http://timbartsch.github.io/examples/no-bounce/).
 
+
+If you develop an iOS app and have direct access to the webview you should disable the bounce effect like this: 
+    
+    webView.scrollView.bounces = NO;
+
+(More infos on this [here](http://stackoverflow.com/questions/500761/stop-uiwebview-from-bouncing-vertically).)
+
 Usage
 ------
 Import noBounce.js to your html file:
