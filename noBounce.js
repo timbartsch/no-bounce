@@ -2,7 +2,6 @@ var noBounce = function(){
 	var module = {};
 
   var settings = {
-    preventDefault: true,
     animate: true
   };
 
@@ -46,9 +45,6 @@ var noBounce = function(){
     })();
 
 	function handleTouchStart (evt){
-    if(settings.preventDefault){
-      evt.preventDefault();
-    }
 		var point,
 			touch;
 
@@ -64,6 +60,8 @@ var noBounce = function(){
 	function handleTouchMove (evt){	
 		var point,
 			touch;
+
+    evt.preventDefault();
 
 		touch = evt.changedTouches[0];
 		point = {
@@ -125,9 +123,6 @@ var noBounce = function(){
   }
 
   module.init = function(options){
-    if(typeof options.preventDefault === "boolean"){
-      settings.preventDefault = options.preventDefault;
-    }
     if(typeof options.animate === "boolean"){
       settings.animate = options.animate;
     }
