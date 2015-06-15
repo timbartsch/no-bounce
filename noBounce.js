@@ -122,16 +122,29 @@ var noBounce = function(){
     }
   }
 
+  //Returns true if it is a DOM element    
+function isElement(o){
+  return (
+    typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+    o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+);
+}
+
   module.init = function(options){
     if(typeof options.animate === "boolean"){
       settings.animate = options.animate;
     }
+    if(isElement(options.element)) {
+      settings.element = options.element;
+    }
 
-    document.addEventListener("touchstart", handleTouchStart);
-    document.addEventListener("touchmove", handleTouchMove);
-    document.addEventListener("touchend", handleTouchEnd);
-    document.addEventListener("touchcancel", handleTouchEnd);
-    document.addEventListener("touchleave", handleTouchEnd);
+    var element = settings.element || document;
+
+    element.addEventListener("touchstart", handleTouchStart);
+    element.addEventListener("touchmove", handleTouchMove);
+    element.addEventListener("touchend", handleTouchEnd);
+    element.addEventListener("touchcancel", handleTouchEnd);
+    element.addEventListener("touchleave", handleTouchEnd);
   };
 
 	return module;
