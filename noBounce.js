@@ -48,7 +48,12 @@ var noBounce = function() {
     var point,
       touch;
 
-    touch = evt.changedTouches[0];
+    if(evt.changedTouches){
+      touch = evt.changedTouches[0];
+    } else {
+      touch = evt;
+    }
+
     point = {
       x: touch.clientX,
       y: touch.clientY,
@@ -63,7 +68,12 @@ var noBounce = function() {
 
     evt.preventDefault();
 
-    touch = evt.changedTouches[0];
+    if(evt.changedTouches){
+      touch = evt.changedTouches[0];
+    } else {
+      touch = evt;
+    }
+
     point = {
       x: touch.clientX,
       y: touch.clientY,
@@ -145,6 +155,14 @@ var noBounce = function() {
     element.addEventListener("touchend", handleTouchEnd);
     element.addEventListener("touchcancel", handleTouchEnd);
     element.addEventListener("touchleave", handleTouchEnd);
+
+    element.addEventListener("pointerdown", handleTouchStart);
+    // Yes mousemove. No idea why but that's what works :/
+    // https://patrickhlauke.github.io/touch/tests/results/
+    element.addEventListener("mousemove", handleTouchMove);
+    element.addEventListener("pointerup", handleTouchEnd);
+    element.addEventListener("pointercancel", handleTouchEnd);
+    element.addEventListener("pointerleave", handleTouchEnd);
   };
 
   return module;
