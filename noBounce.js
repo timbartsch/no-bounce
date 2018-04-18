@@ -134,17 +134,24 @@ var noBounce = function() {
     if (typeof options.animate === "boolean") {
       settings.animate = options.animate;
     }
-    if (isElement(options.element)) {
-      settings.element = options.element;
+
+    if(options.element instanceof Array){
+      settings.elements = options.elements
+    } else {
+      settings.elements = [options.elements]
     }
 
-    var element = settings.element || document;
+    var elements = settings.elements || [document];
 
-    element.addEventListener("touchstart", handleTouchStart);
-    element.addEventListener("touchmove", handleTouchMove);
-    element.addEventListener("touchend", handleTouchEnd);
-    element.addEventListener("touchcancel", handleTouchEnd);
-    element.addEventListener("touchleave", handleTouchEnd);
+    for(var i = 0; i < elements.length; i++){
+      if(isElement(elements[i])){
+        elements[i].addEventListener("touchstart", handleTouchStart);
+        elements[i].addEventListener("touchmove", handleTouchMove);
+        elements[i].addEventListener("touchend", handleTouchEnd);
+        elements[i].addEventListener("touchcancel", handleTouchEnd);
+        elements[i].addEventListener("touchleave", handleTouchEnd);
+      }
+    }
   };
 
   return module;
